@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bloggingapp-deployment
+  name: fullstackblog-deployment
 spec:
   selector:
     matchLabels:
-      app: bloggingapp
+      app: fullstackblog
   replicas: 2
   template:
     metadata:
       labels:
-        app: bloggingapp
+        app: fullstackblog
     spec:
       containers:
-        - name: bloggingapp
-          image: abrahimcse/bloggingapp:latest # Updated image to private DockerHub image
+        - name: fullstackblog
+          image: dinesh1097/fullstackblog:latest # Updated image to private DockerHub image
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -24,10 +24,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: bloggingapp-ssvc
+  name: fullstackblog-service
 spec:
   selector:
-    app: bloggingapp
+    app: fullstackblog
   ports:
     - protocol: "TCP"
       port: 80
