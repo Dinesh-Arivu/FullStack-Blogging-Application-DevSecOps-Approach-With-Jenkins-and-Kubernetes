@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fullstackblog-deployment
+spec:
+  selector:
+    matchLabels:
+      app: fullstackblog
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: fullstackblog
+    spec:
+      containers:
+        - name: fullstackblog
+          image: dinesh1097/fullstackblog:latest # Updated image to private DockerHub image
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+      imagePullSecrets:
+        - name: regcred # Reference to the Docker registry secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fullstackblog-service
+spec:
+  selector:
+    app: fullstackblog
+  ports:
+    - protocol: "TCP"
+      port: 80
+      targetPort: 8080 
+  type: LoadBalancer
