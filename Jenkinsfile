@@ -58,6 +58,14 @@ pipeline {
                 echo "Skipping Nexus deployment (no Nexus configured)."
             }
         }
+        stage('Cleanup Old Containers') {
+            steps {
+                script {
+                    // Remove by name (safe)
+                    sh "docker rm -f fullstackblog || true"
+                }
+            }
+        }    
         stage('Build & Tag Docker Image') {
             steps {
                script {
