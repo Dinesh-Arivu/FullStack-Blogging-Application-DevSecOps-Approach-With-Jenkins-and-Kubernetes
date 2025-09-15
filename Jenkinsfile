@@ -63,7 +63,6 @@ pipeline {
                script {
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker') {
                             sh "docker build -t dinesh1097/fullstackblog:latest ."
-                            sh "docker tag fullstackblog dinesh1097/fullstackblog:latest "
                     }
                }
             }
